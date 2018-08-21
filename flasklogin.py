@@ -30,15 +30,15 @@ class UsersRepository:
         self.users_id_dict = dict()
         self.identifier = 0
     
-    def save_user(self , user):
-        self.users_id_dict.setdefault(user.id , user)
-        self.users.setdefault(user.username , user)
+    def save_user(self, user):
+        self.users_id_dict.setdefault(user.id, user)
+        self.users.setdefault(user.username, user)
     
-    def get_user(self , username):
+    def get_user(self, username):
         return self.users.get(username)
     
-    def get_user_by_id(self , userid):
-        return self.users.get(userid)
+    def get_user_by_id(self, userid):
+        return self.users_id_dict.get(userid)
     
     def next_index(self):
         self.identifier +=1
