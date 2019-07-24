@@ -1,5 +1,5 @@
 from flask import Flask , request , abort , redirect , Response ,url_for
-from flask.ext.login import LoginManager , login_required , UserMixin , login_user
+from flask.ext.login import LoginManager , login_required , UserMixin , login_user, current_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -54,7 +54,7 @@ def index():
 @app.route('/home')
 @login_required
 def home():
-    return "<h1>User Home</h1>"
+    return "<h1>" + current_user.username + "'s Home</h1>"
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
@@ -105,6 +105,6 @@ def page_not_found(e):
 @login_manager.user_loader
 def load_user(userid):
     return users_repository.get_user_by_id(userid)
- 
+
 if __name__ == '__main__':
     app.run(host='192.168.218.100', port=4005, debug =True)
